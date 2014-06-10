@@ -1,0 +1,202 @@
+﻿@model it.ModelsDefault1.Candidatos
+@{
+    ViewBag.Title = "Novo";
+    List<SelectListItem> CNHTipos = new List<SelectListItem>();
+    CNHTipos.Add(new SelectListItem
+    {
+        Text = "Não Possuo",
+        Value = null,
+        Selected = true
+    });
+    CNHTipos.Add(new SelectListItem
+    {
+        Text = "A",
+        Value = "A",
+    });
+    CNHTipos.Add(new SelectListItem
+    {
+        Text = "B",
+        Value = "B"
+    });
+    CNHTipos.Add(new SelectListItem
+    {
+        Text = "C",
+        Value = "C"
+    });
+    CNHTipos.Add(new SelectListItem
+    {
+        Text = "D",
+        Value = "D"
+    });
+    CNHTipos.Add(new SelectListItem
+    {
+        Text = "E",
+        Value = "E"
+    });
+    CNHTipos.Add(new SelectListItem
+    {
+        Text = "A-B",
+        Value = "A-B"
+    });
+    CNHTipos.Add(new SelectListItem
+    {
+        Text = "A-C",
+        Value = "A-C"
+    });
+    CNHTipos.Add(new SelectListItem
+    {
+        Text = "A-D",
+        Value = "A-D"
+    });
+    CNHTipos.Add(new SelectListItem
+    {
+        Text = "A-E",
+        Value = "A-E"
+    });
+
+    List<SelectListItem> EstadoCivilLista = new List<SelectListItem>();
+    EstadoCivilLista.Add(new SelectListItem
+    {
+        Text = "",
+        Value = null,
+        Selected = true
+    });
+    EstadoCivilLista.Add(new SelectListItem
+    {
+        Text = "Casado(a)",
+        Value = "Casado(a)"
+    });
+    EstadoCivilLista.Add(new SelectListItem
+    {
+        Text = "Solteiro(a)",
+        Value = "Solteiro(a)"
+    });
+    EstadoCivilLista.Add(new SelectListItem
+    {
+        Text = "Divorciado(a)",
+        Value = "Divorciado(a)"
+    });
+    EstadoCivilLista.Add(new SelectListItem
+    {
+        Text = "União estável",
+        Value = "União estável"
+    });
+}
+<script>
+    $(function () {
+        $('#phone-mask').mask("(00) 0000-0000");
+        $('#cellphone-mask').mask("(00) 0000-0000 0");
+        $('#date').mask("00/00/0000");
+    });
+</script>
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="box-generic col-lg-10">
+
+        <div class="tabsbar tabsbar-2">
+            <ul class="row row-merge">
+                <li class="col-md-3 glyphicons parents active"><a href="#tab1-4" data-toggle="tab"><i></i> Pessoal</a></li>
+                <li class="col-md-3 glyphicons book_open "><a href="#tab2-4" data-toggle="tab"><i></i> <span> Curso</span></a></li>
+                <li class="col-md-3 glyphicons luggage"><a href="#tab3-4" data-toggle="tab"><i></i> <span> Experiencia</span></a></li>
+                <li class="col-md-3 glyphicons globe"><a href="#tab4-4" data-toggle="tab"><i></i> <span> Idiomas</span></a></li>
+            </ul>
+        </div>
+        @using (Html.BeginForm("Salvar", "Candidatos", new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="tab-content content-md">
+                <div class="tab-pane active" id="tab1-4">
+                    <div class="innerLR expand-top-bottom">
+                        <div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Nome</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(c => c.Nome, new { @class = "form-control placeholder-red", @placeholder = "Nome" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class=" col-lg-3 control-label">Sexo:</label>
+                            <div class="col-lg-9">
+                                @Html.RadioButtonFor(model => model.Sexo, "Masculino")
+                                <label>Masculino</label><br />
+                                @Html.RadioButtonFor(model => model.Sexo, "Feminino")
+                                <label>Feminino</label><br />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">CNH:</label>
+                            <div class="col-lg-9">
+                                @Html.DropDownListFor(c => c.CNH, CNHTipos, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Data de nascimento</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(x => x.DataNasc, new { @class = "form-control", @id = "date", @placeholder = "__/__/____" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Dependentes</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(x => x.Dependentes, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Estado Civil</label>
+                            <div class="col-lg-9">
+                                @Html.DropDownListFor(c => c.EstadoCivil, EstadoCivilLista, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Telefone</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(x => x.Telefone, new { @class = "form-control", @id = "phone-mask", @placeholder = "(00) 0000-0000" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Celular</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(x => x.Celular, new { @class = "form-control", @id = "cellphone-mask", @placeholder = "(00) 0000-0000 0" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">E-mail</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "exemplo@exemplo.com" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Endereço</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(x => x.Endereco, new { @class = "form-control", @placeholder = "exemplo: Rua exemplo, Nº 10" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Bairro</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(x => x.Bairro, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Cidade</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(x => x.Cidade, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Estado</label>
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(x => x.Estado, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Salvar" class="btn btn-primary col-lg-offset-2" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
